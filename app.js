@@ -19,6 +19,31 @@ function saveTask(e){
     tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }
+
+  getTasks();
   e.preventDefault();
 } 
 
+function getTasks(){
+  let tasks = JSON.parse(localStorage.getItem('tasks'));
+  let tasksView = document.getElementById('tasks');
+
+  tasksView.innerHTML = ``;
+
+  for(let i = 0 ; i < tasks.length; i++){
+    let title = tasks[i].title;
+    let description = tasks[i].description;
+
+    tasksView.innerHTML += `<div class="card mb-4">
+      <div class="card-body">
+        <p>${title} - ${description}</p>
+        <a class="btn btn-danger">
+          Delete
+        <a/>
+      </div>
+    </div>`
+  }
+}
+
+
+getTasks();
